@@ -39,16 +39,16 @@ major_version = int(major_version)
 minor_version = int(minor_version)
 name = 'trytond_debug'
 
-download_url = 'http://github.com/coopengo/trytond_debug/'
+download_url = 'http://github.com/coopengo/trytond-debug/'
 if minor_version % 2:
     version = '%s.%s.dev0' % (major_version, minor_version)
-    download_url = 'git+http://github.com/coopengo/trytond_debug#egg=master'
+    download_url = 'git+http://github.com/coopengo/trytond-debug#egg=master'
 
 requires = []
 for dep in info.get('depends', []):
     if not re.match(r'(ir|res)(\W|$)', dep):
-        requires.append(get_require_version('trytond_%s' % dep))
-requires.append(get_require_version('trytond'))
+        requires.append('trytond_' % dep)
+requires.append('trytond')
 
 tests_require = [get_require_version('proteus')]
 dependency_links = []
@@ -59,7 +59,6 @@ if minor_version % 2:
 setup(name=name,
     version=version,
     description='Tryton module to help development',
-    long_description=read('README'),
     author='Coopengo',
     author_email='dev@coopengo.com',
     url='http://www.coopengo.com/',
